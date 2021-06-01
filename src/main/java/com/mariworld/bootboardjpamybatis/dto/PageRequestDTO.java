@@ -8,7 +8,9 @@ import org.springframework.data.domain.Sort;
 @Builder
 @NoArgsConstructor
 public class PageRequestDTO {
+    @Builder.Default
     private int page=1;
+    @Builder.Default
     private int size=10;
 
     public PageRequestDTO(int page, int size){

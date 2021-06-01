@@ -3,7 +3,7 @@
 <th:block th:replace="~{/fragment/layout::setContent(~{this::content})}">
   <th:block th:fragment="content">
     <h1>Login page</h1>
-      <form th:action="@{/customLogin}" method="post">
+      <form th:action="@{/login}" method="post">
         <div class="form-group">
           <input type="email" name="username" class="form-control form-control-user"
                  placeholder="Enter Email Address...">

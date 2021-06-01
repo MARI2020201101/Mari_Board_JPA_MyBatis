@@ -3,10 +3,13 @@ package com.mariworld.bootboardjpamybatis.controller;
 import com.mariworld.bootboardjpamybatis.dto.BoardDTO;
 import com.mariworld.bootboardjpamybatis.dto.PageRequestDTO;
 import com.mariworld.bootboardjpamybatis.entity.Board;
+import com.mariworld.bootboardjpamybatis.security.MemberDTO;
 import com.mariworld.bootboardjpamybatis.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,17 +17,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
 @Slf4j
-@PreAuthorize("hasAnyRole('USER','ADMIN')")
 public class BoardController {
 
     private final BoardService boardService;
 
     @GetMapping("/list")
-    public String index(Model model, PageRequestDTO pageRequestDTO){
+    public String index(Model model, PageRequestDTO pageRequestDTO
+            , @AuthenticationPrincipal MemberDTO memberDTO){
+
+        log.info("---------------------------------------------------------------");
+        log.info(memberDTO.toString());
+        List<String> authList
+                = memberDTO.getAuthorities()
+                .stream().map(a->a.toString()).collect(Collectors.toList());
+        authList.stream().forEach(a->log.info(a));
+        log.info("---------------------------------------------------------------");
 
         model.addAttribute("list",boardService.getList(pageRequestDTO));
         return "/board/list";

@@ -18,6 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/customLogin").loginProcessingUrl("/customLogin");
+        http.authorizeRequests()
+                .antMatchers("/board/**").authenticated()
+                .and()
+                .formLogin().loginPage("/customLogin").loginProcessingUrl("/login");
     }
 }
