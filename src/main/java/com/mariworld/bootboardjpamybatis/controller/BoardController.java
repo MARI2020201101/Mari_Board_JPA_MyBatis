@@ -6,6 +6,7 @@ import com.mariworld.bootboardjpamybatis.entity.Board;
 import com.mariworld.bootboardjpamybatis.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/board")
 @RequiredArgsConstructor
 @Slf4j
+@PreAuthorize("hasAnyRole('USER','ADMIN')")
 public class BoardController {
 
     private final BoardService boardService;

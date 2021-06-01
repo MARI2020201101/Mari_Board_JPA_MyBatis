@@ -7,7 +7,6 @@ import com.mariworld.bootboardjpamybatis.entity.Board;
 import com.mariworld.bootboardjpamybatis.entity.Member;
 import com.mariworld.bootboardjpamybatis.mapper.BoardMapper;
 import com.mariworld.bootboardjpamybatis.repository.BoardRepository;
-import com.querydsl.core.BooleanBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,8 +1,8 @@
 package com.mariworld.bootboardjpamybatis.controller;
 
-import com.mariworld.bootboardjpamybatis.dto.MemberDTO;
-import lombok.RequiredArgsConstructor;
+import com.mariworld.bootboardjpamybatis.security.MemberDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ public class CommonController {
     }
 
     @PostMapping("/customLogin")
-    public void customLogin(MemberDTO memberDTO){
+    public void customLogin(@AuthenticationPrincipal MemberDTO memberDTO){
         log.info("login......");
         log.info(memberDTO.toString());
     }
