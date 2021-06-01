@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/fragment/layout::setContent(~{this::content})}">
+  <th:block th:fragment="content">
+    <h1>Login page</h1>
+      <form th:action="@{/customLogin}" method="post">
+        <div class="form-group">
+          <input type="email" name="email" class="form-control form-control-user"
+                 placeholder="Enter Email Address...">
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
+        </div>
+        <a class="btn btn-primary btn-user btn-block">
+          Login
+        </a>
+            <button class="btn btn-primary" type="button">
+             Login
+            </button>
+      </form>
+  </th:block>
+</th:block>
+</html>
