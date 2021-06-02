@@ -11,6 +11,7 @@ public class CommonController {
     @GetMapping("/customLogin")
     public void customLoginForm(){
     }
-
-
+    @GetMapping("/accessError")
+    public void accessError(){
+    }
 }
