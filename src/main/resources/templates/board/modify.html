@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <th:block th:replace="~{/fragment/layout::setContent(~{this::content})}">
   <th:block th:fragment="content">
     <h1>Modify page</h1>
@@ -19,7 +19,7 @@
     </div>
     <div class="form-group row">
       <label>Email</label>
-      <input type="text" class="form-control form-control-user" name="email" th:value="${dto.email}" readonly>
+      <input type="text" class="form-control form-control-user" id="email" name="email" th:value="${dto.email}" readonly>
     </div>
 
     <button class="btn btn-secondary btn-icon-split modBtn">
@@ -32,38 +32,50 @@
         <span class="text">Remove</span>
       </button>
     </form>
+    <div sec:authentication="name" id="principal"></div>
     <script th:inline="javascript">
-      var form = $("form");
-      var modBtn = $(".modBtn");
-      var listBtn = $(".listBtn");
-      var removeBtn = $(".removeBtn");
+      $(document).ready(function (){
 
-      modBtn.on("click",function(e){
-        e.preventDefault();
-        console.log(this);
-        if(confirm("수정하시겠습니까?")){
-          form.submit();
+        var principal=$("#principal").html();
+        var email = $("#email").val();
+        var form = $("form");
+        var modBtn = $(".modBtn");
+        var listBtn = $(".listBtn");
+        var removeBtn = $(".removeBtn");
+
+        $("#principal").hide();
+        if(principal!=email){
+          modBtn.hide();
+          removeBtn.hide();
         }
-      });
+        modBtn.on("click",function(e){
+          e.preventDefault();
+          console.log(this);
+          if(confirm("수정하시겠습니까?")){
+            form.submit();
+          }
+        });
 
-      listBtn.on("click",function(e){
-        e.preventDefault();
-        var page = $("input[name=page]");
-        console.log(page);
-        form.empty();
-        form.attr("method", "get");
-        form.attr("action", "/board/list");
-        form.append(page);
-        form.submit();
-      });
-
-      removeBtn.on("click",function(e){
-        e.preventDefault();
-        if(confirm("삭제하시겠습니까?")){
-          form.attr("action", "/board/remove");
+        listBtn.on("click",function(e){
+          e.preventDefault();
+          var page = $("input[name=page]");
+          console.log(page);
+          form.empty();
+          form.attr("method", "get");
+          form.attr("action", "/board/list");
+          form.append(page);
           form.submit();
-        }
+        });
+
+        removeBtn.on("click",function(e){
+          e.preventDefault();
+          if(confirm("삭제하시겠습니까?")){
+            form.attr("action", "/board/remove");
+            form.submit();
+          }
+        });
       });
+
     </script>
   </th:block>
 </th:block>

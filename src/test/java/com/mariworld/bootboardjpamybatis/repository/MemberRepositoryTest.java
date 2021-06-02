@@ -25,7 +25,7 @@ public class MemberRepositoryTest {
                     Member member = Member.builder()
                             .email("user"+i+"@mail.com")
                             .password("1111")
-                            .name("user"+i)
+                            .name("사용자"+i)
                             .build();
                     memberRepository.save(member);
                 }

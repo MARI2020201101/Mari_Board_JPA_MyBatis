@@ -7,9 +7,10 @@ import com.mariworld.bootboardjpamybatis.security.MemberDTO;
 import com.mariworld.bootboardjpamybatis.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dom4j.rule.Mode;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,21 +34,28 @@ public class BoardController {
             , @AuthenticationPrincipal MemberDTO memberDTO){
 
         log.info("---------------------------------------------------------------");
-        log.info(memberDTO.toString());
-        List<String> authList
-                = memberDTO.getAuthorities()
-                .stream().map(a->a.toString()).collect(Collectors.toList());
-        authList.stream().forEach(a->log.info(a));
+        if(memberDTO!=null){
+            log.info(memberDTO.toString());
+            List<String> authList
+                    = memberDTO.getAuthorities()
+                    .stream().map(a->a.toString()).collect(Collectors.toList());
+            authList.stream().forEach(a->log.info(a));
+        }
         log.info("---------------------------------------------------------------");
 
         model.addAttribute("list",boardService.getList(pageRequestDTO));
         return "/board/list";
     }
+    //@PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
-    public String registerForm(PageRequestDTO pageRequestDTO){
+    public String registerForm(PageRequestDTO pageRequestDTO
+            , @AuthenticationPrincipal MemberDTO memberDTO, Model model){
+        model.addAttribute("memberDTO" ,memberDTO);
         return "/board/register";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/register")
     public String register(BoardDTO dto, PageRequestDTO pageRequestDTO
             , RedirectAttributes attr){
@@ -65,7 +73,7 @@ public class BoardController {
         BoardDTO dto = boardService.read(bno);
         model.addAttribute("dto", dto);
     }
-
+    @PreAuthorize("authentication.principal.username == #dto.email")
     @PostMapping("/modify")
     public String modify(BoardDTO dto, PageRequestDTO pageRequestDTO
         , RedirectAttributes rttr){
@@ -75,6 +83,7 @@ public class BoardController {
         return "redirect:/board/read";
     }
 
+    @PreAuthorize("authentication.principal.username == #dto.email")
     @PostMapping("/remove")
     public String remove(BoardDTO dto, RedirectAttributes rttr){
         boardService.remove(dto.getBno());

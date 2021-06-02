@@ -28,7 +28,7 @@ public class MemberUserDetailsService implements UserDetailsService {
         MemberDTO memberDTO = new MemberDTO(username
                 , member.getPassword()
                 , member.getName()
-                , List.of(new SimpleGrantedAuthority(member.getMemberRole().name())));
+                , List.of(new SimpleGrantedAuthority("ROLE_"+member.getMemberRole().name())));
         return memberDTO;
     }
 }
