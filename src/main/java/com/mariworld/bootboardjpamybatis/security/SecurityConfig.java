@@ -27,9 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/board/register").hasAnyRole("ROLE_ADMIN")
                 .antMatchers("/board/**").authenticated()
+
                 .and()
                 .formLogin().loginPage("/customLogin").loginProcessingUrl("/login")
 
-        .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+                .and()
+                .logout().logoutUrl("/customLogout").invalidateHttpSession(true)
+
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
     }
 }
