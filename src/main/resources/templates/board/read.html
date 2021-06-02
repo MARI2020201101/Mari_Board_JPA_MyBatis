@@ -17,7 +17,7 @@
       </div>
       <div class="form-group row">
         <label>Writer Email</label>
-        <input type="text" class="form-control form-control-user" id="email" name="email" th:value="${dto.email}" readonly>
+        <input type="text" class="form-control form-control-user" name="email" th:value="${dto.email}" readonly>
       </div>
       <div class="form-group row">
         <label>Writer Name</label>
@@ -33,39 +33,18 @@
         <input type="text" class="form-control form-control-user" name="modDate" th:value="${#temporals.format(dto.modDate,'yyyy/MM/dd')}" readonly>
       </div>
 
-    <div sec:authentication="name" id="principal"></div>
-    <script th:inline="javascript">
-      $(document).ready(function (){
-
-        var principal=$("#principal").html();
-        $("#principal").hide();
-        console.log(principal);
-        var email = $("#email").val();
-        var modBtn = $(".modBtn");
-        modBtn.hide();
-
-        if(principal==email){
-          console.log("principal==email");
-          console.log(email);
-          modBtn.show();
-        }else{
-          console.log("principal!=email");
-          console.log(email);
-        }
-      });
-
-    </script>
-    <a th:href="@{/board/modify(page=${pageRequestDTO.page}, bno=${dto.bno})}">
-      <button class="btn btn-secondary btn-icon-split modBtn" >
-        <span class="text">Modify</span>
-      </button>
-    </a>
-
-    <a th:href="@{/board/list(page=${pageRequestDTO.page})}">
-      <button class="btn btn-info btn-icon-split">
-       <span class="text">List</span>
-      </button>
-    </a>
+    <th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or ${#authentication.name == dto.email}">
+      <a th:href="@{/board/modify(page=${pageRequestDTO.page}, bno=${dto.bno})}">
+        <button class="btn btn-secondary btn-icon-split modBtn" >
+          <span class="text">Modify</span>
+        </button>
+      </a>
+    </th:block>
+      <a th:href="@{/board/list(page=${pageRequestDTO.page})}">
+        <button class="btn btn-info btn-icon-split">
+         <span class="text">List</span>
+        </button>
+      </a>
   </th:block>
 </th:block>
 </html>

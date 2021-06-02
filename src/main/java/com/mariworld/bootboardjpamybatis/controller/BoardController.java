@@ -67,13 +67,21 @@ public class BoardController {
         //attr.addAttribute("page", pageRequestDTO.getPage());
         return "redirect:/board/list";
     }
-    @GetMapping({"/read","/modify"})
+    @GetMapping("/read")
     public void read(Long bno, PageRequestDTO pageRequestDTO
         , Model model){
         BoardDTO dto = boardService.read(bno);
         model.addAttribute("dto", dto);
     }
-    @PreAuthorize("authentication.principal.username == #dto.email")
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify")
+    public void modify(Long bno, PageRequestDTO pageRequestDTO
+            , Model model){
+        BoardDTO dto = boardService.read(bno);
+        model.addAttribute("dto", dto);
+    }
+
+    @PreAuthorize("authentication.principal.username == #dto.email or hasRole('ROLE_ADMIN')")
     @PostMapping("/modify")
     public String modify(BoardDTO dto, PageRequestDTO pageRequestDTO
         , RedirectAttributes rttr){
@@ -83,7 +91,7 @@ public class BoardController {
         return "redirect:/board/read";
     }
 
-    @PreAuthorize("authentication.principal.username == #dto.email")
+    @PreAuthorize("authentication.principal.username == #dto.email or hasRole('ROLE_ADMIN')")
     @PostMapping("/remove")
     public String remove(BoardDTO dto, RedirectAttributes rttr){
         boardService.remove(dto.getBno());

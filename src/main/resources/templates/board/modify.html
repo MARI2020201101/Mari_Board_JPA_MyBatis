@@ -19,35 +19,32 @@
     </div>
     <div class="form-group row">
       <label>Email</label>
-      <input type="text" class="form-control form-control-user" id="email" name="email" th:value="${dto.email}" readonly>
+      <input type="text" class="form-control form-control-user" name="email" th:value="${dto.email}" readonly>
     </div>
 
-    <button class="btn btn-secondary btn-icon-split modBtn">
-      <span class="text">Modify</span>
-    </button>
+      <th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} or ${#authentication.name == dto.email}">
+        <button class="btn btn-secondary btn-icon-split modBtn">
+          <span class="text">Modify</span>
+        </button>
+        <button class="btn btn-danger btn-icon-split removeBtn">
+          <span class="text">Remove</span>
+        </button>
+      </th:block>
+
     <button class="btn btn-info btn-icon-split listBtn">
       <span class="text">List</span>
     </button>
-      <button class="btn btn-danger btn-icon-split removeBtn">
-        <span class="text">Remove</span>
-      </button>
+
     </form>
-    <div sec:authentication="name" id="principal"></div>
+
     <script th:inline="javascript">
       $(document).ready(function (){
 
-        var principal=$("#principal").html();
-        var email = $("#email").val();
         var form = $("form");
         var modBtn = $(".modBtn");
         var listBtn = $(".listBtn");
         var removeBtn = $(".removeBtn");
 
-        $("#principal").hide();
-        if(principal!=email){
-          modBtn.hide();
-          removeBtn.hide();
-        }
         modBtn.on("click",function(e){
           e.preventDefault();
           console.log(this);
