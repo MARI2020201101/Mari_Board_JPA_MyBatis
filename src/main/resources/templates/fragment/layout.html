@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <th:block th:fragment="setContent(content)">
 <head>
 
@@ -79,11 +79,13 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li><a th:href="@{/customLogin}">Login</a></li>
-
+                        <div sec:authorize="isAnonymous()">
+                            <li ><a th:href="@{/customLogin}">Login</a></li>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
                             <li><a th:href="@{/customLogout}">Logout</a></li>
+                        </div>
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 

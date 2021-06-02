@@ -49,8 +49,7 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String register(BoardDTO dto
-            , PageRequestDTO pageRequestDTO
+    public String register(BoardDTO dto, PageRequestDTO pageRequestDTO
             , RedirectAttributes attr){
         log.info(String.valueOf(dto));
         log.info(String.valueOf(pageRequestDTO));

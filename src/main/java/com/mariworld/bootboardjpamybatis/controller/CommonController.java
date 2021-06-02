@@ -24,8 +24,9 @@ public class CommonController {
 
     @GetMapping("/customLogin")
     public void customLoginForm(String error, String logout, Model model
-        , @AuthenticationPrincipal MemberDTO memberDTO
-        , HttpServletResponse response) throws IOException {
+            ,@AuthenticationPrincipal MemberDTO memberDTO){
+
+        log.info("customLogin.........................");
         if(error!=null){
             model.addAttribute("msg","패스워드와 아이디를 확인해 주십시오");
         }
@@ -33,7 +34,7 @@ public class CommonController {
             model.addAttribute("msg","로그아웃 되었습니다.");
         }
         if(memberDTO!=null){
-            response.sendRedirect("/customLogout");
+            model.addAttribute("memberDTO", memberDTO);
         }
     }
     @GetMapping("/accessError")
