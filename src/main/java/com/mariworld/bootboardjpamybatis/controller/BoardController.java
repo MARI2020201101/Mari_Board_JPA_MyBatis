@@ -84,12 +84,14 @@ public class BoardController {
     @PreAuthorize("authentication.principal.username == #dto.email or hasRole('ROLE_ADMIN')")
     @PostMapping("/modify")
     public String modify( PageRequestDTO pageRequestDTO
-        , RedirectAttributes rttr, BoardDTO dto /*, @AuthenticationPrincipal MemberDTO memberDTO*/){
-        /*BoardDTO dto = boardService.read(bno);*/
-        /*if(memberDTO.getUsername()!=dto.getEmail()){
-            return "";
-        }*/
-        boardService.modify(dto);
+            , RedirectAttributes rttr, BoardDTO dto
+            , @AuthenticationPrincipal MemberDTO memberDTO){
+
+          BoardDTO modDto = boardService.read(dto.getBno());
+        if(memberDTO.getUsername()!=dto.getEmail()){
+            return "redirect:/accessError";
+        }
+        boardService.modify(modDto);
         rttr.addAttribute("page", pageRequestDTO.getPage());
         rttr.addAttribute("bno", dto.getBno());
         return "redirect:/board/read";
