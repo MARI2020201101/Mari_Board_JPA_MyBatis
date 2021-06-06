@@ -5,6 +5,7 @@ import com.mariworld.bootboardjpamybatis.dto.PageRequestDTO;
 import com.mariworld.bootboardjpamybatis.dto.PageResultDTO;
 import com.mariworld.bootboardjpamybatis.entity.Board;
 import com.mariworld.bootboardjpamybatis.entity.Member;
+import com.mariworld.bootboardjpamybatis.entity.MemberRole;
 import com.mariworld.bootboardjpamybatis.mapper.BoardMapper;
 import com.mariworld.bootboardjpamybatis.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
