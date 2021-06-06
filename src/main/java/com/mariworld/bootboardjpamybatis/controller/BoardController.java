@@ -87,11 +87,16 @@ public class BoardController {
             , RedirectAttributes rttr, BoardDTO dto
             , @AuthenticationPrincipal MemberDTO memberDTO){
 
-          BoardDTO modDto = boardService.read(dto.getBno());
-        if(memberDTO.getUsername()!=dto.getEmail()){
+        BoardDTO modDto = boardService.read(dto.getBno());
+        log.info("------------------------------------------");
+        log.info("memberDTO.getUsername()"+ memberDTO.getUsername());
+        log.info("dto.getEmail()"+ dto.getEmail());
+        log.info("------------------------------------------");
+        
+        if(!(memberDTO.getUsername().equals(modDto.getEmail()))){
             return "redirect:/accessError";
         }
-        boardService.modify(modDto);
+        boardService.modify(dto);
         rttr.addAttribute("page", pageRequestDTO.getPage());
         rttr.addAttribute("bno", dto.getBno());
         return "redirect:/board/read";
