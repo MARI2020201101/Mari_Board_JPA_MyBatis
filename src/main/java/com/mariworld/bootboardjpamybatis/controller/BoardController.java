@@ -92,7 +92,7 @@ public class BoardController {
         log.info("memberDTO.getUsername()"+ memberDTO.getUsername());
         log.info("dto.getEmail()"+ dto.getEmail());
         log.info("------------------------------------------");
-        
+
         if(!(memberDTO.getUsername().equals(modDto.getEmail()))){
             return "redirect:/accessError";
         }
