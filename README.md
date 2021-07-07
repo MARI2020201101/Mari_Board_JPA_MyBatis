@@ -1,6 +1,6 @@
 # Mari_Board_JPA_MyBatis
 ***
-## 기능
+## ver. 02
 - 회원제 게시판
 ## 프로젝트 목적
 - Spring data JPA를 활용하기
