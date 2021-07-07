@@ -1,4 +1,5 @@
 # Mari_Board_JPA_MyBatis
+***
 ## 기능
 - 회원제 게시판
 ## 프로젝트 목적
@@ -21,3 +22,6 @@
 
   JPA의 간결성 + xml을 통한 수정 배포의 용이성 구현.
 - 어노테이션으로 postMapping 의 접근제어 + 자바코드로 db에서 해당 유저 정보를 한번 더 확인하여 보안 강화
+***
+![작성자가 아닐경우](https://github.com/MARI2020201101/Mari_Board_JPA_MyBatis/blob/master/user!%3Dwriter.png)
+![작성자 or 관리자일 경우](https://github.com/MARI2020201101/Mari_Board_JPA_MyBatis/blob/master/user%3D%3Dwriter.png)
