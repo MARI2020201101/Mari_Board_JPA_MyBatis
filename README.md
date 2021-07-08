@@ -6,6 +6,13 @@
 - Spring data JPA를 활용하기
 - Spring Security를 커스터마이징하기
 - 피드백을 받고 지속적으로 개선하기
+***
+### 작성자가 아닐경우
+![작성자가 아닐경우](https://github.com/MARI2020201101/Mari_Board_JPA_MyBatis/blob/master/user!%3Dwriter.png)
+
+### 작성자 or 관리자일 경우
+![작성자 or 관리자일 경우](https://github.com/MARI2020201101/Mari_Board_JPA_MyBatis/blob/master/user%3D%3Dwriter.png)
+***
 ## 신경 쓴 점
 - url이 아니라, controller의 메서드 별로 보다 상세한 접근제어 처리
 - view에서의 접근제어
@@ -22,9 +29,4 @@
 
   JPA의 간결성 + xml을 통한 수정 배포의 용이성 구현.
 - 어노테이션으로 postMapping 의 접근제어 + 자바코드로 db에서 해당 유저 정보를 한번 더 확인하여 보안 강화
-***
-### 작성자가 아닐경우
-![작성자가 아닐경우](https://github.com/MARI2020201101/Mari_Board_JPA_MyBatis/blob/master/user!%3Dwriter.png)
 
-### 작성자 or 관리자일 경우
-![작성자 or 관리자일 경우](https://github.com/MARI2020201101/Mari_Board_JPA_MyBatis/blob/master/user%3D%3Dwriter.png)
