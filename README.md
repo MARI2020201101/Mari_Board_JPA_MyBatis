@@ -14,7 +14,8 @@
 ![작성자 or 관리자일 경우](https://github.com/MARI2020201101/Mari_Board_JPA_MyBatis/blob/master/user%3D%3Dwriter.png)
 ***
 ## 신경 쓴 점
-- url이 아니라, controller의 메서드 별로 보다 상세한 접근제어 처리
+- URL 하드코딩 대신 Controller의 메서드 별 독립적 접근제어 처리
+- 다양한 경우의 수의 접근제어 설계 : 인증X , 권한X / 인증O, 권한X / 인증O, 권한O
 - view에서의 접근제어
 - get, post mapping 모두 접근제어
 - 로그인 한 유저가 또 로그인 페이지를 부를경우 -> 다른 화면을 보여주기
