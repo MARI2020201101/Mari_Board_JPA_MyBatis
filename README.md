@@ -1,4 +1,4 @@
-# :small_orange_diamond:Mari_Board_JPA_MyBatis
+# :small_blue_diamond:Mari_Board_JPA_MyBatis
 ***
 ## ver. 02
 - 회원제 게시판
